@@ -300,7 +300,7 @@ public class frmRegistroEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
+    public javax.swing.JPasswordField jPasswordField1;
     public javax.swing.JTextField txtApellidosPersonaContacto;
     public javax.swing.JTextField txtDistrito;
     public javax.swing.JTextField txtEmail;
