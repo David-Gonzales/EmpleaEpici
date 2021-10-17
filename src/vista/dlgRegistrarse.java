@@ -15,8 +15,8 @@ public class dlgRegistrarse extends javax.swing.JDialog {
         Grupo1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbtnEmpresa = new javax.swing.JRadioButton();
+        rbtnPostulante = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -31,32 +31,29 @@ public class dlgRegistrarse extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        Grupo1.add(jRadioButton1);
-        jRadioButton1.setText("Empresa");
+        Grupo1.add(rbtnEmpresa);
+        rbtnEmpresa.setText("Empresa");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
-        jPanel1.add(jRadioButton1, gridBagConstraints);
+        jPanel1.add(rbtnEmpresa, gridBagConstraints);
 
-        Grupo1.add(jRadioButton2);
-        jRadioButton2.setText("Postulante");
+        Grupo1.add(rbtnPostulante);
+        rbtnPostulante.setText("Postulante");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
-        jPanel1.add(jRadioButton2, gridBagConstraints);
+        jPanel1.add(rbtnPostulante, gridBagConstraints);
 
         jButton1.setText("Registrarme");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
         jPanel1.add(jButton1, gridBagConstraints);
 
@@ -64,11 +61,17 @@ public class dlgRegistrarse extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,7 +123,7 @@ public class dlgRegistrarse extends javax.swing.JDialog {
     public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JRadioButton jRadioButton1;
-    public javax.swing.JRadioButton jRadioButton2;
+    public javax.swing.JRadioButton rbtnEmpresa;
+    public javax.swing.JRadioButton rbtnPostulante;
     // End of variables declaration//GEN-END:variables
 }
