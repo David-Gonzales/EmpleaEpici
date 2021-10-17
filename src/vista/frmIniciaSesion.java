@@ -16,7 +16,7 @@ public class frmIniciaSesion extends javax.swing.JFrame {
      */
     public frmIniciaSesion() {
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -42,6 +42,7 @@ public class frmIniciaSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar sesión");
 
         jPanel1.setToolTipText("");
 
