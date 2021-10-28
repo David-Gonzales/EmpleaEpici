@@ -36,6 +36,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
         btnRegistrarme = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrarse como");
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
