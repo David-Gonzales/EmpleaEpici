@@ -169,9 +169,9 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="142" max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCrearAnuncio" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPostular" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -182,8 +182,8 @@
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="jTextField1" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton1" alignment="2" max="32767" attributes="0"/>
-                              <Component id="jButton2" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton3" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCrearAnuncio" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPostular" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="13" max="32767" attributes="0"/>
                       </Group>
@@ -206,12 +206,12 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btnCrearAnuncio">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crear anuncio"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JButton" name="btnPostular">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Postular"/>
                   </Properties>

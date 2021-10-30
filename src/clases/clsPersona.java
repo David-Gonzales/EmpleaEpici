@@ -1,6 +1,6 @@
 package clases;
 
-public abstract class clsPersona {
+public class clsPersona {
     protected String dni;
     protected String nombre;
     protected String apellidoPaterno;
