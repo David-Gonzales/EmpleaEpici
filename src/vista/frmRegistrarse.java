@@ -5,6 +5,8 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jsdvd
@@ -16,6 +18,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
      */
     public frmRegistrarse() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -68,11 +71,11 @@ public class frmRegistrarse extends javax.swing.JFrame {
         jPanel1.add(rbtnPostulante, gridBagConstraints);
 
         btnRegistrarme.setText("Registrarme");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
-        jPanel1.add(btnRegistrarme, gridBagConstraints);
+        btnRegistrarme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarmeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,18 +84,40 @@ public class frmRegistrarse extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegistrarme)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistrarme)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
+        if (rbtnPostulante.isSelected() == true){
+            dlgRegistroPostulante ventPostulante = new dlgRegistroPostulante(this, rootPaneCheckingEnabled);
+            ventPostulante.setVisible(true);
+        } 
+        
+        if (rbtnEmpresa.isSelected() == true){
+            dlgRegistroEmpresa ventEmpresa = new dlgRegistroEmpresa(this, rootPaneCheckingEnabled);
+            ventEmpresa.setVisible(true);
+        }
+        
+        if (rbtnPostulante.isSelected() == false && rbtnEmpresa.isSelected() == false){
+            JOptionPane.showMessageDialog(this, "Haga una selección");
+        }
+    }//GEN-LAST:event_btnRegistrarmeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,7 +130,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
