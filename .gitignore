@@ -1,6 +1,8 @@
-/build/
-/nbproject/private/private.properties
-/nbproject/private/private.xml
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
 build/
-nbproject/private/private.properties
-nbproject/private/private.xml
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
