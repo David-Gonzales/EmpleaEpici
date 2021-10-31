@@ -223,12 +223,12 @@ public class dlgRegistroEmpresa extends javax.swing.JDialog {
 
         });
     }
-    
-    public void validar(){
+
+    public void validar() {
         validarnumeros(txtRUC);
         validarnumeros(txtClave);
         validarnumeros(txtTelefono);
-        
+
         validarLetras(txtRazonSocial);
         validarLetras(txtNombreComercial);
         validarLetras(txtNombrePersonaContacto);
@@ -236,25 +236,38 @@ public class dlgRegistroEmpresa extends javax.swing.JDialog {
         validarLetras(txtApellidoMaternoPersonaContacto);
     }
 
+    private boolean estanVaciosLosCampos() {
+        return (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty()
+                || txtRazonSocial.getText().isEmpty() || txtNombreComercial.getText().isEmpty()
+                || txtRUC.getText().isEmpty() || txtNombrePersonaContacto.getText().isEmpty()
+                || txtApellidoPaternoPersonaContacto.getText().isEmpty()
+                || txtApellidoMaternoPersonaContacto.getText().isEmpty()
+                || txtTelefono.getText().isEmpty());
+    }
+
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
-        String nombreUsuario = txtUsuario.getText();
-        String clave = txtClave.getText();
-        String razonSocial = txtRazonSocial.getText();
-        String nombreComercial = txtNombreComercial.getText();
-        String ruc = txtRUC.getText();
-        String nombrePersona = txtNombrePersonaContacto.getText();
-        String apellidoPaterno = txtApellidoPaternoPersonaContacto.getText();
-        String apellidoMaterno = txtApellidoMaternoPersonaContacto.getText();
-        String telefono = txtTelefono.getText();
+        if (estanVaciosLosCampos()) {
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+        } else {
+            String nombreUsuario = txtUsuario.getText();
+            String clave = txtClave.getText();
+            String razonSocial = txtRazonSocial.getText();
+            String nombreComercial = txtNombreComercial.getText();
+            String ruc = txtRUC.getText();
+            String nombrePersona = txtNombrePersonaContacto.getText();
+            String apellidoPaterno = txtApellidoPaternoPersonaContacto.getText();
+            String apellidoMaterno = txtApellidoMaternoPersonaContacto.getText();
+            String telefono = txtTelefono.getText();
 
-        clsUsuario userEmpresa = new clsUsuario("Empresa", nombreUsuario, clave);
-        clsPersona personaContacto = new clsPersona(nombrePersona, apellidoPaterno, apellidoMaterno);
-        clsEmpresa empresa = new clsEmpresa(razonSocial, nombreComercial, ruc, telefono, userEmpresa, personaContacto);
-        clsEmpresaAD empresaAd = new clsEmpresaAD();
-        empresaAd.registrar(empresa);
+            clsUsuario userEmpresa = new clsUsuario("Empresa", nombreUsuario, clave);
+            clsPersona personaContacto = new clsPersona(nombrePersona, apellidoPaterno, apellidoMaterno);
+            clsEmpresa empresa = new clsEmpresa(razonSocial, nombreComercial, ruc, telefono, userEmpresa, personaContacto);
+            clsEmpresaAD empresaAd = new clsEmpresaAD();
+            empresaAd.registrar(empresa);
 
-        JOptionPane.showMessageDialog(this, "Empresa registrada con éxito");
-        dispose();
+            JOptionPane.showMessageDialog(this, "Empresa registrada con éxito");
+            dispose();
+        }
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     /**
