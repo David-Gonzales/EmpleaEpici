@@ -1,31 +1,19 @@
 package clases;
 
 public class clsPersona {
-    protected String dni;
     protected String nombre;
     protected String apellidoPaterno;
     protected String apellidoMaterno;
-    protected String celular;
 
     public clsPersona() {
     }
 
-    public clsPersona(String dni, String nombre, String apellidoPaterno, String apellidoMaterno, String celular) {
-        this.dni = dni;
+    public clsPersona(String nombre, String apellidoPaterno, String apellidoMaterno) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
-        this.celular = celular;
     }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -50,11 +38,4 @@ public class clsPersona {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    } 
 }

@@ -154,6 +154,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public void seleccionBotones(int tipo){

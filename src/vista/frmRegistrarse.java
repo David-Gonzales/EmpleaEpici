@@ -5,6 +5,8 @@
  */
 package vista;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author jsdvd
  */
 public class frmRegistrarse extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form frmRegistrarse
      */
@@ -38,8 +40,8 @@ public class frmRegistrarse extends javax.swing.JFrame {
         rbtnPostulante = new javax.swing.JRadioButton();
         btnRegistrarme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registrarse como");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro");
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -101,23 +103,25 @@ public class frmRegistrarse extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
-        if (rbtnPostulante.isSelected() == true){
+        if (rbtnPostulante.isSelected() == true) {
             dlgRegistroPostulante ventPostulante = new dlgRegistroPostulante(this, rootPaneCheckingEnabled);
             ventPostulante.setVisible(true);
-        } 
-        
-        if (rbtnEmpresa.isSelected() == true){
+        }
+
+        if (rbtnEmpresa.isSelected() == true) {
             dlgRegistroEmpresa ventEmpresa = new dlgRegistroEmpresa(this, rootPaneCheckingEnabled);
             ventEmpresa.setVisible(true);
         }
-        
-        if (rbtnPostulante.isSelected() == false && rbtnEmpresa.isSelected() == false){
+
+        if (rbtnPostulante.isSelected() == false && rbtnEmpresa.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Haga una selección");
         }
     }//GEN-LAST:event_btnRegistrarmeActionPerformed
+
 
     /**
      * @param args the command line arguments
