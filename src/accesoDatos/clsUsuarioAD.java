@@ -6,6 +6,29 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class clsUsuarioAD {
+
+    public int registrar(clsUsuario usuario){
+        Connection cn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        int idUsuario = 0;
+        
+        try {
+            String sql = "insert into usuario values (null, '"+usuario.getTipo()+
+                    "', '"+usuario.getUsuario()+"', '"+usuario.getClave()+"')";
+            cn = clsConexion.getConexion();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            sql = "select last_insert_id()";
+            rs = st.executeQuery(sql);  
+            rs.next();
+            idUsuario = rs.getInt(1);
+            cn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return idUsuario;
+    }
     
     //Iniciar sesion
     public clsUsuario validar(String usuario, String clave){

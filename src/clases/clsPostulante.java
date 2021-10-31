@@ -1,20 +1,26 @@
 package clases;
 
-public class clsPostulante extends clsPersona{
+public class clsPostulante extends clsPersona {
     private String fechaNacimiento;
+    private String celular;
+    private String dni;
     private clsUsuario usuario;
 
     public clsPostulante() {
     }
 
-    public clsPostulante(String fechaNacimiento, clsUsuario usuario) {
+    public clsPostulante(String fechaNacimiento, String celular, String dni, clsUsuario usuario) {
         this.fechaNacimiento = fechaNacimiento;
+        this.celular = celular;
+        this.dni = dni;
         this.usuario = usuario;
     }
 
-    public clsPostulante(String fechaNacimiento, clsUsuario usuario, String dni, String nombre, String apellidoPaterno, String apellidoMaterno, String celular) {
-        super(dni, nombre, apellidoPaterno, apellidoMaterno, celular);
+    public clsPostulante(String fechaNacimiento, String celular, String dni, clsUsuario usuario, String nombre, String apellidoPaterno, String apellidoMaterno) {
+        super(nombre, apellidoPaterno, apellidoMaterno);
         this.fechaNacimiento = fechaNacimiento;
+        this.celular = celular;
+        this.dni = dni;
         this.usuario = usuario;
     }
 
@@ -73,6 +79,5 @@ public class clsPostulante extends clsPersona{
     public void setCelular(String celular) {
         this.celular = celular;
     }
-    
-    
+
 }
