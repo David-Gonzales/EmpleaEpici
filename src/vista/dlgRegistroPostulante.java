@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
-/**
- *
- * @author José Luis
- */
+import accesoDatos.clsPostulanteAD;
+import accesoDatos.clsUsuarioAD;
+import clases.clsPersona;
+import clases.clsPostulante;
+import clases.clsUsuario;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 public class dlgRegistroPostulante extends javax.swing.JDialog {
 
     /**
@@ -17,6 +19,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
     public dlgRegistroPostulante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        validar();
     }
 
     /**
@@ -31,51 +34,31 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtApellidoPaterno = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtApellidoMaterno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        txtCelular = new javax.swing.JTextField();
+        btnCrearCuenta = new javax.swing.JButton();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        rdMasculino = new javax.swing.JRadioButton();
+        rdFemenino = new javax.swing.JRadioButton();
+        txtClave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de postulante");
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setText("Email");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField1, gridBagConstraints);
 
         jLabel2.setText("Usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -91,15 +74,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField3, gridBagConstraints);
+        jPanel1.add(txtUsuario, gridBagConstraints);
 
         jLabel3.setText("Contraseña");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -115,7 +90,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField4, gridBagConstraints);
+        jPanel1.add(txtApellidoPaterno, gridBagConstraints);
 
         jLabel4.setText("Apellido paterno");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -131,7 +106,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField5, gridBagConstraints);
+        jPanel1.add(txtApellidoMaterno, gridBagConstraints);
 
         jLabel5.setText("Apellido materno");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -144,18 +119,18 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         jLabel6.setText("Nombres");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField6, gridBagConstraints);
+        jPanel1.add(txtNombres, gridBagConstraints);
 
         jLabel7.setText("Sexo");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -179,7 +154,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField8, gridBagConstraints);
+        jPanel1.add(txtDni, gridBagConstraints);
 
         jLabel9.setText("Fecha de nacimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -188,14 +163,6 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel9, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField10, gridBagConstraints);
 
         jLabel10.setText("Celular");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -211,23 +178,20 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jTextField11, gridBagConstraints);
+        jPanel1.add(txtCelular, gridBagConstraints);
 
-        jLabel11.setText("Distrito");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel11, gridBagConstraints);
-
-        jButton1.setText("Crear cuenta");
+        btnCrearCuenta.setText("Crear cuenta");
+        btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 22;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jButton1, gridBagConstraints);
+        jPanel1.add(btnCrearCuenta, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 16;
@@ -235,24 +199,31 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jDateChooser1, gridBagConstraints);
+        jPanel1.add(txtFechaNacimiento, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Masculino");
+        buttonGroup1.add(rdMasculino);
+        rdMasculino.setText("Masculino");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jRadioButton1, gridBagConstraints);
+        jPanel1.add(rdMasculino, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Femenino");
+        buttonGroup1.add(rdFemenino);
+        rdFemenino.setText("Femenino");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jRadioButton2, gridBagConstraints);
+        jPanel1.add(rdFemenino, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(txtClave, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,14 +233,113 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    public void validarLetras(JTextField l) {
+        l.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+
+        });
+    }
+
+    public void validarnumeros(JTextField n) {
+        n.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isLetter(c)) {
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+
+        });
+    }
+
+    public void validar() {
+        validarnumeros(txtDni);
+        validarnumeros(txtClave);
+        validarnumeros(txtCelular);
+
+        validarLetras(txtNombres);
+        validarLetras(txtApellidoMaterno);
+        validarLetras(txtApellidoPaterno);
+    }
+
+    private String obtenerFecha() {
+        String dia = Integer.toString(txtFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH));
+        String mes = Integer.toString(txtFechaNacimiento.getCalendar().get(Calendar.MONTH) + 1);
+        String year = Integer.toString(txtFechaNacimiento.getCalendar().get(Calendar.YEAR));
+
+        String fecha = dia + "-" + mes + "-" + year;
+
+        return fecha;
+    }
+
+    private boolean validarRadioSexo() {
+        return (rdFemenino.isSelected() == false && rdMasculino.isSelected() == false);
+    }
+
+    private boolean estanVaciosLosCampos() {
+        return (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty()
+                || txtNombres.getText().isEmpty() || txtApellidoMaterno.getText().isEmpty()
+                || txtApellidoPaterno.getText().isEmpty()
+                || txtDni.getText().isEmpty()
+                || obtenerFecha().isEmpty()
+                || txtCelular.getText().isEmpty());
+    }
+
+    private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
+        if (estanVaciosLosCampos()) {
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+        } else if (validarRadioSexo()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un sexo");
+        } else {
+            String nombreUsuario = txtUsuario.getText();
+            clsUsuarioAD usuarioAD = new clsUsuarioAD();
+            if (usuarioAD.existeUsuario(nombreUsuario)) {
+                JOptionPane.showMessageDialog(this, "Nombre de usuario ya está en uso, intente de nuevo");
+                txtUsuario.setText("");
+                txtUsuario.requestFocus();
+            } else {
+                String sexo = "";
+
+                String clave = txtClave.getText();
+                String nombre = txtNombres.getText();
+                String apellidoPaterno = txtApellidoPaterno.getText();
+                String apellidoMaterno = txtApellidoMaterno.getText();
+                String dni = txtDni.getText();
+                String celular = txtCelular.getText();
+                String fechaNacimiento = obtenerFecha();
+                if (rdFemenino.isSelected() == true) {
+                    sexo = "Femenino";
+                } else if (rdMasculino.isSelected() == true) {
+                    sexo = "Masculino";
+                }
+
+                clsUsuario userPostulante = new clsUsuario("Postulante", nombreUsuario, clave);
+                clsPersona persona = new clsPersona(nombre, apellidoPaterno, apellidoMaterno);
+
+                clsPostulante postulante = new clsPostulante(fechaNacimiento, celular, dni, sexo, persona, userPostulante);
+                clsPostulanteAD postulanteAD = new clsPostulanteAD();
+                postulanteAD.registrar(postulante);
+                JOptionPane.showMessageDialog(this, "Postulante registrado con éxito");
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,12 +384,9 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrearCuenta;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -329,16 +396,15 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JRadioButton rdFemenino;
+    private javax.swing.JRadioButton rdMasculino;
+    private javax.swing.JTextField txtApellidoMaterno;
+    private javax.swing.JTextField txtApellidoPaterno;
+    private javax.swing.JTextField txtCelular;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JTextField txtDni;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import clases.clsUsuario;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author José Luis
- */
+
 public class frmPantallaPrincipal extends javax.swing.JFrame {
 
     private clsUsuario usuario;
@@ -173,7 +166,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void intemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intemCerrarSesionActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir de la sesión?", "YES_NO_OPTION",
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir de la sesión?", "Cerrar sesión",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if (respuesta == 0) {
             frmIniciarSesion ventana = new frmIniciarSesion();

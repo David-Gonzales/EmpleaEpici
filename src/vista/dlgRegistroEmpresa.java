@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import accesoDatos.clsEmpresaAD;
+import accesoDatos.clsUsuarioAD;
 import clases.clsEmpresa;
 import clases.clsPersona;
 import clases.clsUsuario;
@@ -14,10 +10,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/**
- *
- * @author José Luis
- */
 public class dlgRegistroEmpresa extends javax.swing.JDialog {
 
     /**
@@ -250,23 +242,30 @@ public class dlgRegistroEmpresa extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
         } else {
             String nombreUsuario = txtUsuario.getText();
-            String clave = txtClave.getText();
-            String razonSocial = txtRazonSocial.getText();
-            String nombreComercial = txtNombreComercial.getText();
-            String ruc = txtRUC.getText();
-            String nombrePersona = txtNombrePersonaContacto.getText();
-            String apellidoPaterno = txtApellidoPaternoPersonaContacto.getText();
-            String apellidoMaterno = txtApellidoMaternoPersonaContacto.getText();
-            String telefono = txtTelefono.getText();
+            clsUsuarioAD usuarioAD = new clsUsuarioAD();
+            if (usuarioAD.existeUsuario(nombreUsuario)) {
+                JOptionPane.showMessageDialog(this, "Nombre de usuario ya está en uso, intente de nuevo");
+                txtUsuario.setText("");
+                txtUsuario.requestFocus();
+            } else {
+                String clave = txtClave.getText();
+                String razonSocial = txtRazonSocial.getText();
+                String nombreComercial = txtNombreComercial.getText();
+                String ruc = txtRUC.getText();
+                String nombrePersona = txtNombrePersonaContacto.getText();
+                String apellidoPaterno = txtApellidoPaternoPersonaContacto.getText();
+                String apellidoMaterno = txtApellidoMaternoPersonaContacto.getText();
+                String telefono = txtTelefono.getText();
 
-            clsUsuario userEmpresa = new clsUsuario("Empresa", nombreUsuario, clave);
-            clsPersona personaContacto = new clsPersona(nombrePersona, apellidoPaterno, apellidoMaterno);
-            clsEmpresa empresa = new clsEmpresa(razonSocial, nombreComercial, ruc, telefono, userEmpresa, personaContacto);
-            clsEmpresaAD empresaAd = new clsEmpresaAD();
-            empresaAd.registrar(empresa);
+                clsUsuario userEmpresa = new clsUsuario("Empresa", nombreUsuario, clave);
+                clsPersona personaContacto = new clsPersona(nombrePersona, apellidoPaterno, apellidoMaterno);
+                clsEmpresa empresa = new clsEmpresa(razonSocial, nombreComercial, ruc, telefono, userEmpresa, personaContacto);
+                clsEmpresaAD empresaAd = new clsEmpresaAD();
+                empresaAd.registrar(empresa);
 
-            JOptionPane.showMessageDialog(this, "Empresa registrada con éxito");
-            dispose();
+                JOptionPane.showMessageDialog(this, "Empresa registrada con éxito");
+                dispose();
+            }
         }
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 

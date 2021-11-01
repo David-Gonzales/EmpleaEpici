@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import accesoDatos.clsUsuarioAD;
 import clases.clsUsuario;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author José Luis
- */
+
 public class frmIniciarSesion extends javax.swing.JFrame {
 
     clsUsuarioAD usuarioAD = new clsUsuarioAD();
@@ -167,7 +160,6 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         frmRegistrarse ventana = new frmRegistrarse();
         ventana.setVisible(true);
-        dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

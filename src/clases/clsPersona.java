@@ -1,9 +1,9 @@
 package clases;
 
 public class clsPersona {
-    protected String nombre;
-    protected String apellidoPaterno;
-    protected String apellidoMaterno;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
 
     public clsPersona() {
     }

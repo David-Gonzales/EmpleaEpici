@@ -1,26 +1,22 @@
 package clases;
 
-public class clsPostulante extends clsPersona {
+public class clsPostulante{
     private String fechaNacimiento;
     private String celular;
     private String dni;
+    private String sexo;
+    private clsPersona persona;
     private clsUsuario usuario;
 
     public clsPostulante() {
     }
 
-    public clsPostulante(String fechaNacimiento, String celular, String dni, clsUsuario usuario) {
+    public clsPostulante(String fechaNacimiento, String celular, String dni, String sexo, clsPersona persona, clsUsuario usuario) {
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
         this.dni = dni;
-        this.usuario = usuario;
-    }
-
-    public clsPostulante(String fechaNacimiento, String celular, String dni, clsUsuario usuario, String nombre, String apellidoPaterno, String apellidoMaterno) {
-        super(nombre, apellidoPaterno, apellidoMaterno);
-        this.fechaNacimiento = fechaNacimiento;
-        this.celular = celular;
-        this.dni = dni;
+        this.sexo = sexo;
+        this.persona = persona;
         this.usuario = usuario;
     }
 
@@ -32,12 +28,12 @@ public class clsPostulante extends clsPersona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public clsUsuario getUsuario() {
-        return usuario;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setUsuario(clsUsuario usuario) {
-        this.usuario = usuario;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public String getDni() {
@@ -48,36 +44,28 @@ public class clsPostulante extends clsPersona {
         this.dni = dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public clsPersona getPersona() {
+        return persona;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPersona(clsPersona persona) {
+        this.persona = persona;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
+    public clsUsuario getUsuario() {
+        return usuario;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setUsuario(clsUsuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-}
+  }

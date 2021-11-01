@@ -13,7 +13,6 @@ public class clsEmpresaAD {
 
     //registrar una empresa
     public void registrar(clsEmpresa empresa) {
-
         clsUsuarioAD user = new clsUsuarioAD();
         int idUsuario = user.registrar(empresa.getUsuario());
         clsPersonaAD persona = new clsPersonaAD();
@@ -24,7 +23,8 @@ public class clsEmpresaAD {
 
         try {
             String sql = "insert into empresa values (null, '" + empresa.getRazonSocial() + "', "
-                    + "'" + empresa.getNombreComercial() + "', '" + empresa.getRuc() + "', '" + empresa.getTelefono() + "', " + idUsuario + " , " + idPersona + ");";
+                    + "'" + empresa.getNombreComercial() + "', '" + empresa.getRuc() + "', "
+                    + "'" + empresa.getTelefono() + "', " + idUsuario + " , " + idPersona + ");";
             cn = clsConexion.getConexion();
             st = cn.createStatement();
             st.executeUpdate(sql);

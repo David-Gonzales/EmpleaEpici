@@ -38,7 +38,7 @@ public class clsUsuarioAD {
         ResultSet rs = null;
 
         try {
-            String sql = "select * from usuario where usuario = '" + usuario + "' and clave = " + clave;
+            String sql = "select * from usuario where usuario = '" + usuario + "' and clave = '"+clave+"'";
             cn = clsConexion.getConexion();
             st = cn.createStatement();
             rs = st.executeQuery(sql);
@@ -68,5 +68,28 @@ public class clsUsuarioAD {
             cn.close();
         } catch (Exception e) {
         }
+    }
+    
+    public boolean existeUsuario(String usuario){
+        Connection cn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String nombreUsuario = "";
+        
+        try {
+            String sql = "select usuario from usuario where usuario = '"+usuario+"'";
+            cn = clsConexion.getConexion();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                nombreUsuario = rs.getString(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return !nombreUsuario.isEmpty();
     }
 }
