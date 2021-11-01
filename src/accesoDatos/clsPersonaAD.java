@@ -30,4 +30,21 @@ public class clsPersonaAD {
         
         return idUsuario;
     }
+    
+    public void actualizar(int id, clsPersona persona){
+        Connection cn = null;
+        Statement st = null;
+        String sql = "update persona set nombre = '"+persona.getNombre()+"', "
+                + "apellidoPaterno = '"+persona.getApellidoPaterno()+"', "
+                + "apellidoMaterno = '"+persona.getApellidoMaterno()+"' " +
+                "where id = " + id;
+
+        try {
+            cn = clsConexion.getConexion();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            cn.close();
+        } catch (Exception e) {
+        }
+    }
 }

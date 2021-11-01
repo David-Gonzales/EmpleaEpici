@@ -5,11 +5,16 @@
  */
 package vista;
 
+import clases.clsUsuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author José Luis
  */
 public class frmPantallaPrincipal extends javax.swing.JFrame {
+
+    private clsUsuario usuario;
 
     /**
      * Creates new form frmPantallaPrincipal
@@ -38,8 +43,8 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         btnPostular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itemMiInformacion = new javax.swing.JMenuItem();
+        intemCerrarSesion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emplea EPICI");
@@ -132,11 +137,21 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Sesion");
 
-        jMenuItem1.setText("Mi información");
-        jMenu1.add(jMenuItem1);
+        itemMiInformacion.setText("Mi información");
+        itemMiInformacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMiInformacionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemMiInformacion);
 
-        jMenuItem2.setText("Cerrar sesión");
-        jMenu1.add(jMenuItem2);
+        intemCerrarSesion.setText("Cerrar sesión");
+        intemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intemCerrarSesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(intemCerrarSesion);
 
         jMenuBar1.add(jMenu1);
 
@@ -157,16 +172,40 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void seleccionBotones(int tipo){
-        //0 = empresa
-        //1 = postulante 
-        if (tipo == 1){
-            btnCrearAnuncio.setVisible(false);
-        } else {
+    private void intemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intemCerrarSesionActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir de la sesión?", "YES_NO_OPTION",
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (respuesta == 0) {
+            frmIniciarSesion ventana = new frmIniciarSesion();
+            ventana.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_intemCerrarSesionActionPerformed
+
+    private void itemMiInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMiInformacionActionPerformed
+        if (usuario.getTipo().equals("Empresa")) {
+            dlgInformacionEmpresa ventEmpresa = new dlgInformacionEmpresa(this, rootPaneCheckingEnabled);
+            ventEmpresa.setUsuario(usuario);
+            ventEmpresa.cargarDatos();
+            ventEmpresa.setVisible(true);
+        } else if (usuario.getTipo().equals("Postulante")) {
+            dlgInformacionPostulante ventPostulante = new dlgInformacionPostulante(this, rootPaneCheckingEnabled);
+            ventPostulante.setVisible(true);
+        }
+    }//GEN-LAST:event_itemMiInformacionActionPerformed
+
+    public void seleccionBotones() {
+        if (usuario.getTipo().equals("Empresa")) {
             btnPostular.setVisible(false);
+        } else if (usuario.getTipo().equals("Postulante")) {
+            btnCrearAnuncio.setVisible(false);
         }
     }
-    
+
+    public void setUsuario(clsUsuario usuario) {
+        this.usuario = usuario;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -205,11 +244,11 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearAnuncio;
     private javax.swing.JButton btnPostular;
+    private javax.swing.JMenuItem intemCerrarSesion;
+    private javax.swing.JMenuItem itemMiInformacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

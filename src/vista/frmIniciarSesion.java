@@ -189,15 +189,8 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             usuario = usuarioAD.validar(user, clave);
             if(usuario.getUsuario() != null && usuario.getClave() != null){
                 frmPantallaPrincipal principal = new frmPantallaPrincipal();
-                
-                //0 = empresa
-                //1 = postulante 
-                if (usuario.getTipo().equals("Empresa")){
-                    principal.seleccionBotones(0);
-                } else if (usuario.getTipo().equals("Postulante")){
-                    principal.seleccionBotones(1);
-                }
-                
+                principal.setUsuario(usuario);
+                principal.seleccionBotones();
                 principal.setVisible(true);
                 dispose();
             } else {
