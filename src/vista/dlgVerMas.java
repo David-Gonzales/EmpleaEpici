@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 public class dlgVerMas extends javax.swing.JDialog {
 
     private int fila = 0;
+    private clsUsuario usuario;
+    
     DefaultTableModel modelo = new DefaultTableModel();
 
     public dlgVerMas(java.awt.Frame parent, boolean modal) {
@@ -170,7 +172,7 @@ public class dlgVerMas extends javax.swing.JDialog {
     public void cargarDatos() {
         clsAnuncioAD anuncioAD = new clsAnuncioAD();
         try {
-            ArrayList<String[]> info = anuncioAD.anuncioConRequisitos(fila);
+            ArrayList<String[]> info = anuncioAD.anuncioConRequisitos(fila, usuario);
             txtCargo.setText(info.get(0)[0]);
             txtDescripcion.setText(info.get(0)[1]);
             modelo.setNumRows(0);
@@ -187,6 +189,10 @@ public class dlgVerMas extends javax.swing.JDialog {
 
     public void setFila(int fila) {
         this.fila = fila;
+    }
+    
+    public void setUsuario(clsUsuario usuario) {
+        this.usuario = usuario;
     }
 
     /**

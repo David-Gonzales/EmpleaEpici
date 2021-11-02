@@ -183,7 +183,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
                 frmPantallaPrincipal principal = new frmPantallaPrincipal();
                 principal.setUsuario(usuario);
                 principal.seleccionBotones();
-                principal.cargarListaAnuncioEmpresa();
+                //principal.cargarListaAnuncioEmpresa();
                 principal.setVisible(true);
                 dispose();
             } else {
