@@ -241,6 +241,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         int fila = tablaDatos.getSelectedRow();
         dlgVerMas vtnVerMas = new dlgVerMas(this, rootPaneCheckingEnabled);
         vtnVerMas.setFila(fila + 1);
+        vtnVerMas.setUsuario(usuario);
         vtnVerMas.cargarDatos();
         vtnVerMas.setVisible(true);
     }//GEN-LAST:event_itemVerMasActionPerformed
@@ -277,15 +278,35 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-        //tablaDatos.setModel(modelo);
     } 
+    
+    public void cargarListaAnunciosPostulante(){
+        clsAnuncioAD anuncioAD = new clsAnuncioAD();
+        String titulos[] = {"Nun", "Cargo", "Descripción", "Empresa"};
+        modelo.setColumnIdentifiers(titulos);
+        try {
+            ArrayList<String[]> anuncios = anuncioAD.todosLosAnuncios();
+            modelo.setNumRows(0);
+            int i = 1;
+            for (String[] strings : anuncios) {
+                String fila[] = {i + "", strings[0], strings[1], strings[2]};
+                modelo.addRow(fila);
+            }
+            tablaDatos.setModel(modelo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     
     public void seleccionBotones() {
         if (usuario.getTipo().equals("Empresa")) {
             btnPostular.setVisible(false);
+            cargarListaAnuncioEmpresa();
         } else if (usuario.getTipo().equals("Postulante")) {
             btnCrearAnuncio.setVisible(false);
+            cargarListaAnunciosPostulante();
+            itemVerPostulantes.setVisible(false);
+            itemEliminarAnuncio.setVisible(false);
         }
     }
 
