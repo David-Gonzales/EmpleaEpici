@@ -1,9 +1,14 @@
 
 package vista;
 
+import accesoDatos.clsPostulacionAD;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 
 public class dlgVerPostulantes extends javax.swing.JDialog {
-
+    private int fila = 0;
+    DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form dlgPostulantes
      */
@@ -25,22 +30,22 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ver postulantes");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de postulantes"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Puntaje", "Estado"
+                "Nombre", "Apeliido", "DNI", "Sexo", "Celular", "Puntaje", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaDatos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -48,7 +53,7 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -65,8 +70,8 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +85,7 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +95,24 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+public void cargarDatos() {
+        clsPostulacionAD postulacionAD = new clsPostulacionAD();
+        try {
+            ArrayList<String[]> info = postulacionAD.listaPostulantes(fila);
+            modelo.setNumRows(0);
+            modelo = (DefaultTableModel) tablaDatos.getModel();
+            for (String[] strings : info) {
+                modelo.addRow(strings);
+            }
+            tablaDatos.setModel(modelo);
+        } catch (Exception e) {
+        }
 
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
     /**
      * @param args the command line arguments
      */
@@ -139,6 +161,6 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
 }

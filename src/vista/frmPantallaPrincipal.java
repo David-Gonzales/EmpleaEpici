@@ -1,12 +1,19 @@
 
 package vista;
 
+import accesoDatos.clsAnuncioAD;
+import clases.clsAnuncio;
 import clases.clsUsuario;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class frmPantallaPrincipal extends javax.swing.JFrame {
-
+    //String titulos[] = {"Nun", "Cargo", "Descripción"};
+    DefaultTableModel modelo = new DefaultTableModel();
+     //DefaultTableModel modelo;
     private clsUsuario usuario;
 
     /**
@@ -25,10 +32,14 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        itemVerMas = new javax.swing.JMenuItem();
+        itemVerPostulantes = new javax.swing.JMenuItem();
+        itemEliminarAnuncio = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDatos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -39,20 +50,57 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         itemMiInformacion = new javax.swing.JMenuItem();
         intemCerrarSesion = new javax.swing.JMenuItem();
 
+        itemVerMas.setText("Ver mas");
+        itemVerMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVerMasActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(itemVerMas);
+
+        itemVerPostulantes.setText("Ver postulantes");
+        itemVerPostulantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVerPostulantesActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(itemVerPostulantes);
+
+        itemEliminarAnuncio.setText("Eliminar anuncio");
+        itemEliminarAnuncio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarAnuncioActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(itemEliminarAnuncio);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emplea EPICI");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Anuncios"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Descripción", "Cargo"
+                "Num", "Cargo", "Descripción"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaDatos.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setViewportView(tablaDatos);
+        if (tablaDatos.getColumnModel().getColumnCount() > 0) {
+            tablaDatos.getColumnModel().getColumn(0).setMinWidth(50);
+            tablaDatos.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
 
         jTextField1.setToolTipText("");
 
@@ -187,6 +235,50 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemMiInformacionActionPerformed
 
+    private void itemVerMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemVerMasActionPerformed
+        int fila = tablaDatos.getSelectedRow();
+        dlgVerMas vtnVerMas = new dlgVerMas(this, rootPaneCheckingEnabled);
+        vtnVerMas.setFila(fila + 1);
+        vtnVerMas.cargarDatos();
+        vtnVerMas.setVisible(true);
+    }//GEN-LAST:event_itemVerMasActionPerformed
+
+    private void itemVerPostulantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemVerPostulantesActionPerformed
+        int fila = tablaDatos.getSelectedRow();
+        dlgVerPostulantes vntVerPostulantes = new dlgVerPostulantes(this, rootPaneCheckingEnabled);
+        vntVerPostulantes.setFila(fila + 1);
+        vntVerPostulantes.cargarDatos();
+        vntVerPostulantes.setVisible(true);
+    }//GEN-LAST:event_itemVerPostulantesActionPerformed
+
+    private void itemEliminarAnuncioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarAnuncioActionPerformed
+        
+    }//GEN-LAST:event_itemEliminarAnuncioActionPerformed
+
+    public void cargarListaAnuncioEmpresa(){
+        clsAnuncioAD anuncioAD = new clsAnuncioAD();
+        
+        try {
+            ArrayList<clsAnuncio> anuncios = anuncioAD.anuncios(usuario);
+            modelo.setNumRows(0);
+            modelo = (DefaultTableModel)tablaDatos.getModel();
+            Object[] obj = new Object[3];
+            int i = 1;
+            for (clsAnuncio anuncio : anuncios) {
+                obj[0] = i;
+                obj[1] = anuncio.getCargo();
+                obj[2] = anuncio.getDescripcion();
+                modelo.addRow(obj);
+                i++;
+            }
+            tablaDatos.setModel(modelo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        //tablaDatos.setModel(modelo);
+    } 
+    
     public void seleccionBotones() {
         if (usuario.getTipo().equals("Empresa")) {
             btnPostular.setVisible(false);
@@ -238,15 +330,19 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearAnuncio;
     private javax.swing.JButton btnPostular;
     private javax.swing.JMenuItem intemCerrarSesion;
+    private javax.swing.JMenuItem itemEliminarAnuncio;
     private javax.swing.JMenuItem itemMiInformacion;
+    private javax.swing.JMenuItem itemVerMas;
+    private javax.swing.JMenuItem itemVerPostulantes;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
 }
