@@ -117,4 +117,29 @@ public class clsAnuncioAD {
 
         return anuncios;
     }
+    
+    public ArrayList<String[]> anuncioConRequisitos(int id) throws Exception {
+        Connection cn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        ArrayList<String[]> anuncios = new ArrayList<String[]>();
+
+        try {
+            String sql = "select a.cargo, a.descripcion, r.titulo, r.requisito"
+                    + "	from anuncio a inner join requisitos r on (a.id = r.idAnuncio)"
+                    + "    where a.id = " + id;
+            cn = clsConexion.getConexion();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String anuncio[] = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+                anuncios.add(anuncio);
+            }
+            cn.close();
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+
+        return anuncios;
+    }
 }

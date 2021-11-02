@@ -172,7 +172,13 @@ public class dlgVerMas extends javax.swing.JDialog {
     public void cargarDatos() {
         clsAnuncioAD anuncioAD = new clsAnuncioAD();
         try {
-            ArrayList<String[]> info = anuncioAD.anuncioConRequisitos(fila, usuario);
+            ArrayList<String[]> info;
+            if ("Empresa".equals(usuario.getTipo())){
+                info = anuncioAD.anuncioConRequisitos(fila, usuario);
+            } else {
+                info = anuncioAD.anuncioConRequisitos(fila);
+            }
+            
             txtCargo.setText(info.get(0)[0]);
             txtDescripcion.setText(info.get(0)[1]);
             modelo.setNumRows(0);
