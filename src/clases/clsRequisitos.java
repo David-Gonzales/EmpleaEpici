@@ -14,6 +14,13 @@ public class clsRequisitos {
         this.idAnuncio = idAnuncio;
     }
 
+    public clsRequisitos(String requisito, String titulo) {
+        this.requisito = requisito;
+        this.titulo = titulo;
+    }
+    
+    
+
     public String getRequisito() {
         return requisito;
     }

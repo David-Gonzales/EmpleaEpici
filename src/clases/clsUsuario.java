@@ -1,6 +1,7 @@
 package clases;
 
 public class clsUsuario {
+    private int id;
     private String tipo;
     private String usuario;
     private String clave;
@@ -9,6 +10,13 @@ public class clsUsuario {
     }
 
     public clsUsuario(String tipo, String usuario, String clave) {
+        this.tipo = tipo;
+        this.usuario = usuario;
+        this.clave = clave;
+    }
+
+    public clsUsuario(int id, String tipo, String usuario, String clave) {
+        this.id = id;
         this.tipo = tipo;
         this.usuario = usuario;
         this.clave = clave;
@@ -36,5 +44,13 @@ public class clsUsuario {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

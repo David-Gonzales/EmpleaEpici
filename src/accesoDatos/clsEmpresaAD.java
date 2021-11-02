@@ -61,6 +61,28 @@ public class clsEmpresaAD {
 
         return empresab;
     }
+    
+    public int getId(clsUsuario usuario){
+        int id = 0;
+        Connection cn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        
+        try {
+            String sql = "select id from empresa where idUsuario = " + usuario.getId();
+            cn = clsConexion.getConexion();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            rs.next();
+            id = rs.getInt(1);
+            cn.close();
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+        
+        return id;
+    }
+    
 
     public ArrayList<Integer> obtenerId(clsUsuario usuario) {
         Connection cn = null;

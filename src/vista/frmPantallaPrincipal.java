@@ -11,9 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class frmPantallaPrincipal extends javax.swing.JFrame {
-    //String titulos[] = {"Nun", "Cargo", "Descripción"};
     DefaultTableModel modelo = new DefaultTableModel();
-     //DefaultTableModel modelo;
     private clsUsuario usuario;
 
     /**
@@ -35,7 +33,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         itemVerMas = new javax.swing.JMenuItem();
         itemVerPostulantes = new javax.swing.JMenuItem();
-        itemEliminarAnuncio = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -65,14 +62,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jPopupMenu1.add(itemVerPostulantes);
-
-        itemEliminarAnuncio.setText("Eliminar anuncio");
-        itemEliminarAnuncio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemEliminarAnuncioActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(itemEliminarAnuncio);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emplea EPICI");
@@ -107,6 +96,11 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
 
         btnCrearAnuncio.setText("Crear anuncio");
+        btnCrearAnuncio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearAnuncioActionPerformed(evt);
+            }
+        });
 
         btnPostular.setText("Postular");
 
@@ -254,16 +248,28 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         vntVerPostulantes.setVisible(true);
     }//GEN-LAST:event_itemVerPostulantesActionPerformed
 
-    private void itemEliminarAnuncioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarAnuncioActionPerformed
-        
-    }//GEN-LAST:event_itemEliminarAnuncioActionPerformed
+    private void btnCrearAnuncioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAnuncioActionPerformed
+        dlgCrearAnuncio vnt = new dlgCrearAnuncio(this, rootPaneCheckingEnabled);
+        vnt.setUsuario(usuario);
+        vnt.setVisible(true);
+        if(vnt.getCreeAnuncio() == 1){
+            cargarListaAnuncioEmpresa();
+            System.out.println("liste");
+        }
+    }//GEN-LAST:event_btnCrearAnuncioActionPerformed
 
+    private void limpiarTabla(){
+        for (int i = tablaDatos.getRowCount() - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+    
     public void cargarListaAnuncioEmpresa(){
         clsAnuncioAD anuncioAD = new clsAnuncioAD();
         
         try {
             ArrayList<clsAnuncio> anuncios = anuncioAD.anuncios(usuario);
-            modelo.setNumRows(0);
+            limpiarTabla();
             modelo = (DefaultTableModel)tablaDatos.getModel();
             Object[] obj = new Object[3];
             int i = 1;
@@ -291,6 +297,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             for (String[] strings : anuncios) {
                 String fila[] = {i + "", strings[0], strings[1], strings[2]};
                 modelo.addRow(fila);
+                i++;
             }
             tablaDatos.setModel(modelo);
         } catch (Exception e) {
@@ -306,7 +313,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             btnCrearAnuncio.setVisible(false);
             cargarListaAnunciosPostulante();
             itemVerPostulantes.setVisible(false);
-            itemEliminarAnuncio.setVisible(false);
         }
     }
 
@@ -353,7 +359,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearAnuncio;
     private javax.swing.JButton btnPostular;
     private javax.swing.JMenuItem intemCerrarSesion;
-    private javax.swing.JMenuItem itemEliminarAnuncio;
     private javax.swing.JMenuItem itemMiInformacion;
     private javax.swing.JMenuItem itemVerMas;
     private javax.swing.JMenuItem itemVerPostulantes;

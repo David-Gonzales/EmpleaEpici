@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 public class frmRegistrarse extends javax.swing.JFrame {
     
+    
     /**
      * Creates new form frmRegistrarse
      */
@@ -114,6 +115,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegistrarmeActionPerformed
 
+  
 
     /**
      * @param args the command line arguments

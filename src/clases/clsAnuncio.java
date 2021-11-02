@@ -14,6 +14,13 @@ public class clsAnuncio {
         this.idEmpresa = idEmpresa;
     }
 
+    public clsAnuncio(String descripcion, String cargo) {
+        this.descripcion = descripcion;
+        this.cargo = cargo;
+    }
+    
+    
+
     public String getDescripcion() {
         return descripcion;
     }
