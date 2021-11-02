@@ -231,6 +231,8 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             ventEmpresa.setVisible(true);
         } else if (usuario.getTipo().equals("Postulante")) {
             dlgInformacionPostulante ventPostulante = new dlgInformacionPostulante(this, rootPaneCheckingEnabled);
+            ventPostulante.setUsuario(usuario);
+            ventPostulante.cargarDatos();
             ventPostulante.setVisible(true);
         }
     }//GEN-LAST:event_itemMiInformacionActionPerformed
