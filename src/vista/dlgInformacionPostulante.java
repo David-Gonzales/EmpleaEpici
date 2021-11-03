@@ -1,19 +1,24 @@
 package vista;
 
+import accesoDatos.clsPostulacionAD;
 import accesoDatos.clsPostulanteAD;
 import clases.clsPersona;
 import clases.clsPostulante;
 import clases.clsUsuario;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.DefaultTableModel;
 
 public class dlgInformacionPostulante extends javax.swing.JDialog {
 
     private clsUsuario usuario;
-    
+    DefaultTableModel modelo = new DefaultTableModel();
+
     public dlgInformacionPostulante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**
@@ -52,7 +57,7 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tablaDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mi información");
@@ -237,12 +242,12 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
 
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cargo", "Descripción", "Empresa", "Estado"
+                "Cargo", "Descripción", "Empresa", "Resultado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -253,7 +258,7 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tablaDatos);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -332,8 +337,24 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
         txtDni.setText(postulante.getDni());
         txtFechaNacimiento.setText(postulante.getFechaNacimiento());
         txtCelular.setText(postulante.getCelular());
+        
+        misPostulaciones();
     }
-    
+
+    public void misPostulaciones() {
+        ArrayList<String[]> info;
+        clsPostulacionAD postulacionAD = new clsPostulacionAD();
+        info = postulacionAD.postulaciones(usuario);
+        modelo.setNumRows(0);
+        modelo = (DefaultTableModel) tablaDatos.getModel();
+        for (String[] strings : info) {
+            String fila[] = {strings[0], strings[1], strings[2], strings[3]};
+            modelo.addRow(fila);
+        }
+        tablaDatos.setModel(modelo);
+
+    }
+
     private boolean estanVaciosLosCampos() {
         return (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty()
                 || txtNombres.getText().isEmpty() || txtApPaterno.getText().isEmpty()
@@ -341,11 +362,11 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
                 || txtDni.getText().isEmpty() || txtFechaNacimiento.getText().isEmpty()
                 || txtCelular.getText().isEmpty());
     }
-    
-    public void setUsuario(clsUsuario user){
+
+    public void setUsuario(clsUsuario user) {
         usuario = user;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -406,7 +427,7 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable tablaDatos;
     private javax.swing.JTextField txtApMaterno;
     private javax.swing.JTextField txtApPaterno;
     private javax.swing.JTextField txtCelular;

@@ -12,6 +12,7 @@ import clases.clsUsuario;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +33,7 @@ public class dlgCrearAnuncio extends javax.swing.JDialog {
     public dlgCrearAnuncio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**

@@ -8,6 +8,7 @@ package vista;
 import accesoDatos.clsAnuncioAD;
 import clases.clsUsuario;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +25,7 @@ public class dlgVerMas extends javax.swing.JDialog {
     public dlgVerMas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**

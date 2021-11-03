@@ -1,22 +1,25 @@
-
 package vista;
 
 import accesoDatos.clsUsuarioAD;
 import clases.clsUsuario;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 
 public class frmIniciarSesion extends javax.swing.JFrame {
 
     clsUsuarioAD usuarioAD = new clsUsuarioAD();
     clsUsuario usuario = new clsUsuario();
-    
+
     /**
      * Creates new form frmIniciarSesion
      */
     public frmIniciarSesion() {
         initComponents();
         this.setResizable(false);
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
+        
     }
 
     /**
@@ -52,6 +55,13 @@ public class frmIniciarSesion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Contraseña");
 
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtClaveKeyReleased(evt);
+            }
+        });
+
+        btnRegistrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
         btnRegistrarse.setText("Registrarse");
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +69,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +77,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             }
         });
 
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ingresar.png"))); // NOI18N
         btnIniciarSesion.setText("Iniciar sesión");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +103,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
                         .addComponent(btnRegistrarse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnIniciarSesion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar)))
                 .addContainerGap())
         );
@@ -166,20 +178,26 @@ public class frmIniciarSesion extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public boolean estanVaciosLosCampos(){
+    private void txtClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            validar();
+        }
+    }//GEN-LAST:event_txtClaveKeyReleased
+
+    public boolean estanVaciosLosCampos() {
         return (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty());
     }
-    
-    public void validar(){
-        String user =  txtUsuario.getText();
+
+    public void validar() {
+        String user = txtUsuario.getText();
         String clave = txtClave.getText();
-        
-        if (estanVaciosLosCampos()){
+
+        if (estanVaciosLosCampos()) {
             JOptionPane.showMessageDialog(this, "Los campos están vacíos");
             txtUsuario.requestFocus();
         } else {
             usuario = usuarioAD.validar(user, clave);
-            if(usuario.getUsuario() != null && usuario.getClave() != null){
+            if (usuario.getUsuario() != null && usuario.getClave() != null) {
                 frmPantallaPrincipal principal = new frmPantallaPrincipal();
                 principal.setUsuario(usuario);
                 principal.seleccionBotones();
@@ -192,6 +210,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * @param args the command line arguments
      */

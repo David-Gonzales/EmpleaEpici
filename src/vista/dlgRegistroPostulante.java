@@ -8,6 +8,7 @@ import clases.clsUsuario;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -20,6 +21,7 @@ public class dlgRegistroPostulante extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         validar();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**

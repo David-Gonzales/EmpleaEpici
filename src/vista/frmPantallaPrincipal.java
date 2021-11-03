@@ -6,6 +6,7 @@ import clases.clsAnuncio;
 import clases.clsUsuario;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
      */
     public frmPantallaPrincipal() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**
@@ -38,8 +40,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDatos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         btnCrearAnuncio = new javax.swing.JButton();
         btnPostular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -91,10 +91,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             tablaDatos.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
-        jTextField1.setToolTipText("");
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
-
         btnCrearAnuncio.setText("Crear anuncio");
         btnCrearAnuncio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,17 +99,18 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         });
 
         btnPostular.setText("Postular");
+        btnPostular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostularActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCrearAnuncio)
                 .addGap(18, 18, 18)
                 .addComponent(btnPostular)
@@ -123,14 +120,10 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCrearAnuncio)
                     .addComponent(btnPostular))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jTextField1.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -139,7 +132,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -147,7 +140,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addContainerGap())
@@ -244,6 +237,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         int fila = tablaDatos.getSelectedRow();
         dlgVerPostulantes vntVerPostulantes = new dlgVerPostulantes(this, rootPaneCheckingEnabled);
         vntVerPostulantes.setFila(fila + 1);
+        vntVerPostulantes.setUsuario(usuario);
         vntVerPostulantes.cargarDatos();
         vntVerPostulantes.setVisible(true);
     }//GEN-LAST:event_itemVerPostulantesActionPerformed
@@ -257,6 +251,15 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
             System.out.println("liste");
         }
     }//GEN-LAST:event_btnCrearAnuncioActionPerformed
+
+    private void btnPostularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostularActionPerformed
+        int fila = tablaDatos.getSelectedRow();
+        dlgPostular vnt = new dlgPostular(this, rootPaneCheckingEnabled);
+        vnt.setUsuario(usuario);
+        vnt.setFila(fila + 1);
+        vnt.cargarDatos();
+        vnt.setVisible(true);
+    }//GEN-LAST:event_btnPostularActionPerformed
 
     private void limpiarTabla(){
         for (int i = tablaDatos.getRowCount() - 1; i >= 0; i--) {
@@ -362,7 +365,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMiInformacion;
     private javax.swing.JMenuItem itemVerMas;
     private javax.swing.JMenuItem itemVerPostulantes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -370,7 +372,6 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
 }

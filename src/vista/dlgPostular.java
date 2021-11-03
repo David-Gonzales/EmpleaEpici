@@ -1,7 +1,27 @@
 package vista;
 
+import accesoDatos.clsAnuncioAD;
+import accesoDatos.clsPostulacionAD;
+import clases.clsPostulacion;
+import clases.clsRequisitos;
+import clases.clsRespuestas;
+import clases.clsUsuario;
+import com.mysql.cj.util.StringUtils;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class dlgPostular extends javax.swing.JDialog {
+
+    private int fila = 0;
+    private clsUsuario usuario;
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultComboBoxModel comboBoxModelo = new DefaultComboBoxModel();
+    private ArrayList<clsRespuestas> listaRespuestas = new ArrayList<>();
+    private ArrayList<clsRequisitos> listaRequisitos = new ArrayList<>();
 
     /**
      * Creates new form dlgPostular
@@ -9,6 +29,7 @@ public class dlgPostular extends javax.swing.JDialog {
     public dlgPostular(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**
@@ -21,45 +42,56 @@ public class dlgPostular extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnPostular = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCargo = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaRequisitos = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtRespuesta = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        cmbTitulo = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaSkill = new javax.swing.JTable();
+        btnQuitar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Postular");
 
-        jButton2.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Postular");
+        btnPostular.setText("Postular");
+        btnPostular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostularActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setEnabled(false);
-        jScrollPane3.setViewportView(jTextArea2);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        txtDescripcion.setEnabled(false);
+        jScrollPane3.setViewportView(txtDescripcion);
 
         jLabel2.setText("Descripción");
 
         jLabel3.setText("Cargo");
 
-        jTextField2.setEnabled(false);
+        txtCargo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -79,7 +111,7 @@ public class dlgPostular extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(82, 82, 82)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel5Layout.setVerticalGroup(
@@ -87,7 +119,7 @@ public class dlgPostular extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -95,13 +127,13 @@ public class dlgPostular extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(135, Short.MAX_VALUE)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Requisitos"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaRequisitos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -109,8 +141,8 @@ public class dlgPostular extends javax.swing.JDialog {
                 "Titulo", "Requisito"
             }
         ));
-        jTable1.setEnabled(false);
-        jScrollPane1.setViewportView(jTable1);
+        tablaRequisitos.setEnabled(false);
+        jScrollPane1.setViewportView(tablaRequisitos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -125,7 +157,7 @@ public class dlgPostular extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -133,18 +165,21 @@ public class dlgPostular extends javax.swing.JDialog {
 
         jLabel1.setText("Título");
 
-        jLabel5.setText("Requisito");
+        jLabel5.setText("Respuesta");
 
-        jButton4.setText("Agregar");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudios", "Experiencia ", "Años de experiencia", "Idioma", "Otro", " " }));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSkill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Titulo", "Requisito"
+                "Titulo", "Respuesta"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -155,7 +190,14 @@ public class dlgPostular extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaSkill);
+
+        btnQuitar.setText("Quitar");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -163,16 +205,18 @@ public class dlgPostular extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel5))
+                            .addGap(21, 21, 21)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cmbTitulo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -186,14 +230,16 @@ public class dlgPostular extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnQuitar)
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -209,24 +255,24 @@ public class dlgPostular extends javax.swing.JDialog {
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(btnCancelar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(btnPostular)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnPostular)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,13 +284,134 @@ public class dlgPostular extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (estanVaciosCampo()) {
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+        } else {
+            String titulo = cmbTitulo.getSelectedItem().toString();
+
+            String respuesta = txtRespuesta.getText();
+            clsRespuestas rs = new clsRespuestas(titulo, respuesta);
+            listaRespuestas.add(rs);
+            listar();
+            limpiarCampos();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void listar() {
+        modelo = (DefaultTableModel) tablaSkill.getModel();
+        modelo.setNumRows(0);
+        Object[] obj = new Object[2];
+        for (clsRespuestas respuesta : listaRespuestas) {
+            obj[0] = respuesta.getTitulo();
+            obj[1] = respuesta.getRespuesta();
+            modelo.addRow(obj);
+        }
+        tablaSkill.setModel(modelo);
+    }
+
+    private void limpiarCampos() {
+        cmbTitulo.setSelectedIndex(0);
+        txtRespuesta.setText("");
+    }
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        int index = tablaSkill.getSelectedRow();
+        listaRespuestas.remove(index);
+        listar();
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private String calcularResultado() {
+
+        for (clsRespuestas respuesta : listaRespuestas) {
+            for (clsRequisitos requisito : listaRequisitos) {
+                if (respuesta.getTitulo().equals(requisito.getTitulo())) {
+                    String res = respuesta.getRespuesta().toUpperCase();
+                    String rq = requisito.getRequisito().toUpperCase();
+                    if (StringUtils.isStrictlyNumeric(rq)) {
+                        int res01 = Integer.parseInt(res);
+                        int rq01 = Integer.parseInt(rq);
+                        if (rq01 > res01) {
+                            return "No pasa a entrevista";
+                        }
+                    } else {
+                        if (!res.equals(rq)) {
+                            return "No pasa a entrevista";
+                        }
+                    }
+                }
+            }
+        }
+        return "Pasa a entrevista";
+    }
+
+    private void btnPostularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostularActionPerformed
+        if (listaRespuestas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Agrege respuestas");
+        } else {
+            String resultado = calcularResultado();
+            clsPostulacion postulacion = new clsPostulacion(resultado);
+            clsPostulacionAD postulacionAD = new clsPostulacionAD();
+
+            try {
+                postulacionAD.agregar(postulacion, listaRespuestas, usuario, fila);
+            } catch (Exception e) {
+            }
+
+            JOptionPane.showMessageDialog(this, "Postulacion registrada con éxito");
+            dispose();
+        }
+    }//GEN-LAST:event_btnPostularActionPerformed
+
+    private boolean estanVaciosCampo() {
+        return cmbTitulo.getSelectedIndex() == 0 || txtRespuesta.getText().isEmpty();
+    }
+
+    public void cargarDatos() {
+        clsAnuncioAD anuncioAD = new clsAnuncioAD();
+        comboBoxModelo.addElement("--Seleccione--");
+        try {
+            ArrayList<String[]> info;
+
+            info = anuncioAD.anuncioConRequisitos(fila);
+
+            txtCargo.setText(info.get(0)[0]);
+            txtDescripcion.setText(info.get(0)[1]);
+            modelo.setNumRows(0);
+            modelo = (DefaultTableModel) tablaRequisitos.getModel();
+            for (String[] strings : info) {
+                clsRequisitos rq = new clsRequisitos(strings[3], strings[2]);
+                listaRequisitos.add(rq);
+                String fila[] = {strings[2], strings[3]};
+                comboBoxModelo.addElement(strings[2]);
+                modelo.addRow(fila);
+            }
+            tablaRequisitos.setModel(modelo);
+            cmbTitulo.setModel(comboBoxModelo);
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public void setUsuario(clsUsuario usuario) {
+        this.usuario = usuario;
+    }
 
     /**
      * @param args the command line arguments
@@ -289,10 +456,11 @@ public class dlgPostular extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnPostular;
+    private javax.swing.JButton btnQuitar;
+    private javax.swing.JComboBox<String> cmbTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,10 +472,10 @@ public class dlgPostular extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tablaRequisitos;
+    private javax.swing.JTable tablaSkill;
+    private javax.swing.JTextField txtCargo;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtRespuesta;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,11 @@ public class clsRespuestas {
     public clsRespuestas() {
     }
 
+    public clsRespuestas(String titulo, String respuesta) {
+        this.titulo = titulo;
+        this.respuesta = respuesta;
+    }
+    
     public clsRespuestas(String titulo, String respuesta, int idPostulacion) {
         this.titulo = titulo;
         this.respuesta = respuesta;

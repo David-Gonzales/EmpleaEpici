@@ -4,6 +4,7 @@ import accesoDatos.clsEmpresaAD;
 import clases.clsEmpresa;
 import clases.clsPersona;
 import clases.clsUsuario;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
@@ -17,6 +18,7 @@ public class dlgInformacionEmpresa extends javax.swing.JDialog {
     public dlgInformacionEmpresa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**

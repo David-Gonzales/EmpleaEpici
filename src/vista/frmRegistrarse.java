@@ -3,6 +3,7 @@ package vista;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class frmRegistrarse extends javax.swing.JFrame {
@@ -14,6 +15,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
     public frmRegistrarse() {
         initComponents();
         this.setResizable(false);
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**

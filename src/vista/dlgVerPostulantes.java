@@ -1,20 +1,24 @@
-
 package vista;
 
 import accesoDatos.clsPostulacionAD;
+import clases.clsUsuario;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-
 public class dlgVerPostulantes extends javax.swing.JDialog {
+
     private int fila = 0;
+    private clsUsuario usuario;
     DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form dlgPostulantes
      */
     public dlgVerPostulantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../img/icono.png")).getImage());
     }
 
     /**
@@ -42,7 +46,7 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nombre", "Apeliido", "DNI", "Sexo", "Celular", "Puntaje", "Estado"
+                "Nombre", "Apeliido", "DNI", "Sexo", "Celular", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tablaDatos);
@@ -95,10 +99,10 @@ public class dlgVerPostulantes extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-public void cargarDatos() {
+    public void cargarDatos() {
         clsPostulacionAD postulacionAD = new clsPostulacionAD();
         try {
-            ArrayList<String[]> info = postulacionAD.listaPostulantes(fila);
+            ArrayList<String[]> info = postulacionAD.listaPostulantes(fila, usuario);
             modelo.setNumRows(0);
             modelo = (DefaultTableModel) tablaDatos.getModel();
             for (String[] strings : info) {
@@ -113,6 +117,13 @@ public void cargarDatos() {
     public void setFila(int fila) {
         this.fila = fila;
     }
+
+    public void setUsuario(clsUsuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
+
     /**
      * @param args the command line arguments
      */
