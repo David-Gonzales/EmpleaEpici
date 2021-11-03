@@ -165,8 +165,10 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Sesion");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lista.png"))); // NOI18N
+        jMenu1.setText("Sesión");
 
+        itemMiInformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
         itemMiInformacion.setText("Mi información");
         itemMiInformacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +177,7 @@ public class frmPantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(itemMiInformacion);
 
+        intemCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrarSesion.png"))); // NOI18N
         intemCerrarSesion.setText("Cerrar sesión");
         intemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

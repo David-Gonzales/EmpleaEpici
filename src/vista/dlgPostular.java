@@ -337,7 +337,9 @@ public class dlgPostular extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private String calcularResultado() {
-
+        if (listaRequisitos.size() != listaRespuestas.size()){
+            return "No pasa a entrevista";
+        }
         for (clsRespuestas respuesta : listaRespuestas) {
             for (clsRequisitos requisito : listaRequisitos) {
                 if (respuesta.getTitulo().equals(requisito.getTitulo())) {

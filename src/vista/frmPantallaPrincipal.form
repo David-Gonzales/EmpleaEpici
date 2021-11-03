@@ -30,11 +30,17 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sesion"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/lista.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sesi&#xf3;n"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemMiInformacion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/info.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Mi informaci&#xf3;n"/>
               </Properties>
               <Events>
@@ -43,6 +49,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="intemCerrarSesion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/cerrarSesion.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar sesi&#xf3;n"/>
               </Properties>
               <Events>
