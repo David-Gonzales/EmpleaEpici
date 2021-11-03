@@ -218,6 +218,7 @@ public class dlgInformacionPostulante extends javax.swing.JDialog {
 
         jPanel9.setLayout(new java.awt.GridBagLayout());
 
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/update.png"))); // NOI18N
         btnActualizar.setText("Actualizar datos");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

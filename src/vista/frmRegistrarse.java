@@ -67,6 +67,7 @@ public class frmRegistrarse extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 20);
         jPanel1.add(rbtnPostulante, gridBagConstraints);
 
+        btnRegistrarme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
         btnRegistrarme.setText("Registrarme");
         btnRegistrarme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

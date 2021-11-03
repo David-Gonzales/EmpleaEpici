@@ -105,7 +105,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="txtTitulo" min="-2" pref="136" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnQuitar" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="btnQuitar" alignment="1" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="223" max="32767" attributes="0"/>
@@ -160,6 +160,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnAgregar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/add.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar"/>
               </Properties>
               <Events>
@@ -210,6 +213,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnQuitar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/eliminar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Quitar"/>
               </Properties>
               <Events>
@@ -230,6 +236,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnCrearAnuncio">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/nuevo.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Crear anuncio"/>
           </Properties>
           <Events>
@@ -319,6 +328,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
